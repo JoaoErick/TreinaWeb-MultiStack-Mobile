@@ -1,10 +1,9 @@
-import React from "react";
-import { Text, ScrollView } from "react-native";
+import React, { useEffect, useState } from "react";
+import { useTheme } from "@emotion/react";
+import { ScrollView } from "react-native";
 import PageTitle from "ui/components/data-display/PageTitle/PageTitle";
 import TextInput from "ui/components/inputs/TextInput/TextInput";
 import { TextInputMask } from "react-native-masked-text";
-import { useState, useEffect } from "react";
-import { useTheme } from "@emotion/react";
 import Button from "ui/components/inputs/Button/Button";
 import UserInformation from "ui/components/data-display/UserInformation/UserInformation";
 import {
@@ -15,7 +14,6 @@ import {
 } from "@styles/pages/encontrar-diarista.styled";
 import useIndex from "data/hooks/pages/useIndex.page";
 import useEncontrarDiarista from "data/hooks/pages/useEncontrarDiarista.page.mobile";
-
 
 const EncontrarDiaristas: React.FC = () => {
   const { colors } = useTheme();
@@ -32,13 +30,12 @@ const EncontrarDiaristas: React.FC = () => {
     } = useIndex(),
     { cepAutomatico } = useEncontrarDiarista();
 
-    useEffect(() => {
-      if (cepAutomatico && !cep) {
-        setCep(cepAutomatico);
-        buscarProfissionais(cepAutomatico);
-      }
-    }, [cepAutomatico]);
-
+  useEffect(() => {
+    if (cepAutomatico && !cep) {
+      setCep(cepAutomatico);
+      buscarProfissionais(cepAutomatico);
+    }
+  }, [cepAutomatico]);
 
   return (
     <ScrollView>
